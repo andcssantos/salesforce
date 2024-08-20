@@ -1,0 +1,94 @@
+<template>
+
+    <template if:true={records}>
+        <template for:each={records} for:item="record">
+            <div key={record.Id}>
+                <p>{record.Name}</p> <!-- Exemplo: Mostra o nome do registro -->
+                <p>Record ID: {record.Id}</p> <!-- Mostra o ID do registro -->
+            </div>
+        </template>
+    </template>
+    <template if:true={error}>
+        <p>Error: {error.message}</p>
+    </template>
+
+    <article class="slds-card">
+        <div class="slds-grid slds-einstein-header slds-card__header">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-grid slds-grid_vertical-align-center slds-size_3-of-4 slds-medium-size_2-of-3">
+                    <div class="slds-media__body">
+                        <h2 class="slds-truncate" title="Einstein (10+)">
+                            <div class="slds-card__header-link" title="Einstein (10+)">
+                                <span style="margin-left: 10px;">
+                                    <input data-id="cepInput" class="slds-input slds-input_small" value={formattedCep} oninput={handleCepChange} placeholder="Add User CEP" maxlength="9" pattern="\d{5}-\d{3}" required>
+                                </span>
+                            </div>
+                        </h2>
+                    </div>
+                </div>
+                <div class="slds-einstein-header__figure slds-size_1-of-4 slds-medium-size_1-of-3"></div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <template if:true={address}>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_small">
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small">
+                            <label class="slds-text-title_bold">Logradouro:</label>
+                            <input data-id="logradouroInput" class="slds-input slds-input_small" value={address.logradouro} readonly tabindex="-1">
+                        </div>
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small">
+                            <label class="slds-text-title_bold">Número:</label>
+                            <input data-id="numeroInput" class="slds-input slds-input_small" tabindex="0" required>
+                        </div>
+                        <div class="slds-box slds-box_xx-small">
+                            <label class="slds-text-title_bold">Complemento:</label>
+                            <input data-id="complementoInput" class="slds-input slds-input_small" tabindex="0">
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_small">
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small">
+                            <label class="slds-text-title_bold">Bairro:</label>
+                            <input data-id="bairroInput" class="slds-input slds-input_small" value={address.bairro} readonly  tabindex="-1">
+                        </div>
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small">
+                            <label class="slds-text-title_bold">Cidade:</label>
+                            <input data-id="cidadeInput" class="slds-input slds-input_small" value={address.localidade} readonly  tabindex="-1">
+                        </div>
+                        <div class="slds-box slds-box_xx-small">
+                            <label class="slds-text-title_bold">Estado:</label>
+                            <input data-id="ufInput" class="slds-input slds-input_small" value={address.uf} readonly  tabindex="-1">
+                        </div>
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small" style="display: none;">
+                            <label class="slds-text-title_bold">IBGE:</label>
+                            <input data-id="ibgeInput" class="slds-input slds-input_small" value={address.ibge} readonly  tabindex="-1">
+                        </div>
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small" style="display: none;">
+                            <label class="slds-text-title_bold">GIA:</label>
+                            <input data-id="giaInput" class="slds-input slds-input_small" value={address.gia} readonly  tabindex="-1">
+                        </div>
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small" style="display: none;">
+                            <label class="slds-text-title_bold">DDD:</label>
+                            <input data-id="dddInput" class="slds-input slds-input_small" value={address.ddd} readonly  tabindex="-1">
+                        </div>
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small" style="display: none;">
+                            <label class="slds-text-title_bold">SIAFI:</label>
+                            <input data-id="siafiInput" class="slds-input slds-input_small" value={address.siafi} readonly  tabindex="-1">
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-p-around_small" style="margin-top: -10px;">
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small">
+                            <label class="slds-text-title_bold">Observação:</label>
+                            <textarea data-id="observacaoInput" class="slds-textarea slds-textarea_large" placeholder="Digite sua observação aqui..."  tabindex="0"></textarea>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-p-around_small" style="margin-top: -10px;">
+                        <div class="slds-box slds-box_xx-small slds-m-bottom_small">
+                            <button class="slds-button slds-button_brand" style="width: 100%;" tabindex="0" onclick={handleSave}>Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </article>
+</template>
